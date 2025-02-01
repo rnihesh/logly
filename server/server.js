@@ -5,11 +5,11 @@ const mongoose = require("mongoose");
 const userApp = require("./APIs/userApi");
 const authorApp = require("./APIs/authorApi");
 const adminApp = require("./APIs/adminApi");
-const clerkMiddleware = require("@clerk/express");
+// const {clerkMiddleware} = require("@clerk/express");
 
 const port = process.env.PORT || 4000;
 
-app.use(clerkMiddleware())
+// app.use(clerkMiddleware())
 
 //db connnection
 mongoose
