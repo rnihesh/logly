@@ -5,8 +5,11 @@ const mongoose = require("mongoose");
 const userApp = require("./APIs/userApi");
 const authorApp = require("./APIs/authorApi");
 const adminApp = require("./APIs/adminApi");
+const clerkMiddleware = require("@clerk/express");
 
 const port = process.env.PORT || 4000;
+
+app.use(clerkMiddleware())
 
 //db connnection
 mongoose
@@ -17,10 +20,8 @@ mongoose
   })
   .catch((err) => console.log("Error in DB Connection ", err));
 
-
-
 //body parser middleware
-app.use(exp.json())
+app.use(exp.json());
 
 //connect API routes
 app.use("/user-api", userApp);
