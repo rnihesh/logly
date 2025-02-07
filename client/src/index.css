@@ -178,9 +178,9 @@ body {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-.card .heading {
-    /* font-family: "Oswald", serif; */
-}
+/* .card .heading {
+    font-family: "Oswald", serif;
+} */
 
 .article-content {
     text-indent: 100px;

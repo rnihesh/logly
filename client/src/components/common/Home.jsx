@@ -1,17 +1,59 @@
 import React from "react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { userAuthorContextObj } from "../../contexts/UserAuthorContext.jsx";
 import { useUser, useAuth } from "@clerk/clerk-react";
-import axios from "axios"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { currentUser, setCurrentUser } = useContext(userAuthorContextObj);
 
   const { isSignedIn, user, isLoaded } = useUser();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
   console.log("isSignedIn :", isSignedIn);
   console.log("user :", user);
   console.log("isLoaded :", isLoaded);
 
+  async function onSelectRole(e) {
+    //clear error property
+    setError("");
+    const selectedRole = e.target.value;
+    currentUser.role = selectedRole;
+    let res = null;
+    if (selectedRole === "author") {
+      res = await axios.post(
+        "http://localhost:3000/author-api/author",
+        currentUser
+      );
+      let { message, payload } = res.data;
+      if (message === "author") {
+        setCurrentUser({
+          ...currentUser,
+          ...payload,
+        });
+      } else {
+        setError(message);
+      }
+    }
+    if (selectedRole === "user") {
+      res = await axios.post(
+        "http://localhost:3000/user-api/user",
+        currentUser
+      );
+      let { message, payload } = res.data;
+      if (message === "user") {
+        setCurrentUser({
+          ...currentUser,
+          ...payload,
+        });
+      } else {
+        setError(message);
+      }
+    }
+  }
+  console.log("current user : ", currentUser);
   useEffect(() => {
     setCurrentUser({
       ...currentUser,
@@ -22,35 +64,18 @@ function Home() {
     });
   }, [isLoaded]);
 
-  async function onSelectRole(e){
-    const selectedRole = e.target.value;
-    currentUser.role = selectedRole;
-    let res = null;
-    if(selectedRole ==='author'){
-      res = await axios.post('http://localhost:3000/author-api/author',currentUser)
-      let {message, payload} = res.data;
-      if(message==='author'){
-        setCurrentUser({
-          ...currentUser,
-          ...payload
-        })
-      }
+  useEffect(() => {
+    if (currentUser?.role === "user" && error.length === 0) {
+      navigate(`/user-profile/${currentuser.email}`);
     }
-    if(selectedRole==='user'){res = await axios.post('http://localhost:3000/user-api/user',currentUser)
-      let {message, payload} = res.data;
-      if(message==='user'){
-        setCurrentUser({
-          ...currentUser,
-          ...payload
-        })
-      }
+    if (currentUser?.role === "author" && error.length === 0) {
+      navigate(`author-profile/${currentUser.email}`);
     }
-
-  }
+  }, [currentUser?.role]);
 
   return (
     <div className="container">
-      {isSignedIn === false && 
+      {isSignedIn === false && (
         <div>
           <p className="lead">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
@@ -95,29 +120,59 @@ function Home() {
             necessitatibus!
           </p>
         </div>
-      }
-      {
-        isSignedIn === true && 
+      )}
+      {isSignedIn === true && (
         <div>
           <div className="d-flex justify-content-evenly bg-info p-3">
-            <img src={user.imageUrl} width='100px' height='100px' className="rounded-circle" />
-            <p className="display-6">{user.firstName} <br/>  {user.emailAddresses[0].emailAddress}</p>
+            <img
+              src={user.imageUrl}
+              width="100px"
+              height="100px"
+              className="rounded-circle"
+            />
+            <p className="display-6">
+              {user.firstName} <br /> {user.emailAddresses[0].emailAddress}
+            </p>
           </div>
-<p className="lead">Select role</p>
-        <div className="d-flex role-radio py-3 justify-content-center">
-        <div className="form-check me-4">
-          <input type="radio" name="role" value='author' id="author" className="form-check-input" onChange={onSelectRole}/>
-          <label htmlFor="author" className="form-check-label">Author</label>
+          <p className="lead">Select role</p>
+          {error.length !== 0 && (
+            <p
+              className="text-danger fs-5 font-monospace"
+              style={{ fontFamily: "sans-serif" }}
+            >
+              {error}
+            </p>
+          )}
+          <div className="d-flex role-radio py-3 justify-content-center">
+            <div className="form-check me-4">
+              <input
+                type="radio"
+                name="role"
+                value="author"
+                id="author"
+                className="form-check-input"
+                onChange={onSelectRole}
+              />
+              <label htmlFor="author" className="form-check-label">
+                Author
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                name="role"
+                value="user"
+                id="user"
+                className="form-check-input"
+                onChange={onSelectRole}
+              />
+              <label htmlFor="user" className="form-check-label">
+                User
+              </label>
+            </div>
           </div>
-          <div className="form-check">
-          <input type="radio" name="role" value='user' id="user" className="form-check-input" onChange={onSelectRole}/>
-          <label htmlFor="user" className="form-check-label">User</label>
-          </div>
-
-          </div>
-          
         </div>
-      }
+      )}
     </div>
   );
 }

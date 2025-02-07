@@ -58,7 +58,7 @@ function Header() {
                 />
                 <p
                   className="role"
-                  style={{ position: "absolute", top: "0px", right: "-20px" }}
+                  style={{ position: "absolute", top: "10px", right: "15px" }}
                 >
                   {currentUser.role}
                 </p>
