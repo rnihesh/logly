@@ -12,9 +12,9 @@ function Home() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  console.log("isSignedIn :", isSignedIn);
+  // console.log("isSignedIn :", isSignedIn);
   console.log("user :", user);
-  console.log("isLoaded :", isLoaded);
+  // console.log("isLoaded :", isLoaded);
 
   async function onSelectRole(e) {
     //clear error property

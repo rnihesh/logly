@@ -4,8 +4,10 @@ const authorApp = exp.Router();
 const expressAsyncHandler = require("express-async-handler");
 const createUserOrAuthor = require("./createUserOrAuthor.js");
 const Article = require("../models/articleModel.js");
+const { requireAuth, clerkMiddleware } = require("@clerk/express");
+require("dotenv").config();
 
-//API
+// authorApp.use(clerkMiddleware())
 
 //create new author
 authorApp.post("/author", expressAsyncHandler(createUserOrAuthor));
@@ -25,12 +27,17 @@ authorApp.post(
 //read all articles
 authorApp.get(
   "/articles",
+  requireAuth({ signInUrl: "unauthorized" }),
   expressAsyncHandler(async (req, res) => {
     //read all articles from db
-    const listOfArticles = await Article.find({isArticleActive: true});
+    const listOfArticles = await Article.find({ isArticleActive: true });
     res.status(200).send({ message: "articles", payload: listOfArticles });
   })
 );
+
+authorApp.get("/unauthorized", (req, res) => {
+  res.send({ message: "unauthorized request... login first" });
+});
 
 //modify an article by article idd
 authorApp.put(
@@ -73,8 +80,5 @@ authorApp.put(
     res.status(200).send({ message: "article deleted", payload: dbRes });
   })
 );
-
-
-
 
 module.exports = authorApp;
