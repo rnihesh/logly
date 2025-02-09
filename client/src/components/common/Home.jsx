@@ -34,6 +34,8 @@ function Home() {
             ...currentUser,
             ...payload,
           });
+          //save user to localstorage
+          localStorage.setItem("currentuser", JSON.stringify(payload));
         } else {
           setError(message);
         }
@@ -49,6 +51,8 @@ function Home() {
             ...currentUser,
             ...payload,
           });
+          //save user to localstorage
+          localStorage.setItem("currentuser", JSON.stringify(payload));
         } else {
           setError(message);
         }
