@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@clerk/clerk-react";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { getToken } = useAuth();
 
   //get all articles
   async function getArticles() {
-    let res = await axios.get("http://localhost:3000/author-api/articles");
+    //get jwt token
+    const token = await getToken();
+    //make authenticated request
+    let res = await axios.get("http://localhost:3000/author-api/articles", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     if (res.data.message === "articles") {
       setArticles(res.data.payload);
+      setError("");
     } else {
       setError(res.data.message);
     }
@@ -19,7 +29,7 @@ function Articles() {
 
   //go to article by id
   function goToArticleById(articleObj) {
-    navigate(`../${articleObj.articleId}`, {state: articleObj});
+    navigate(`../${articleObj.articleId}`, { state: articleObj });
   }
 
   useEffect(() => {
@@ -30,6 +40,9 @@ function Articles() {
   return (
     <div className="container">
       <div>
+        {error.length !== 0 && (
+          <p className="display-4 text-center mt-5 text-danger">{error}</p>
+        )}
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
           {articles.map((articleObj) => (
             <div className="col" key={articleObj.articleId}>
@@ -54,7 +67,7 @@ function Articles() {
                   </p>
                   <button
                     className="custom-btn btn-4"
-                    onClick={()=>goToArticleById(articleObj)}
+                    onClick={() => goToArticleById(articleObj)}
                   >
                     Read more
                   </button>

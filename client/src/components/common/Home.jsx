@@ -71,7 +71,7 @@ function Home() {
     if (currentUser?.role === "author" && error.length === 0) {
       navigate(`author-profile/${currentUser.email}`);
     }
-  }, [currentUser?.role]);
+  }, [currentUser]);
 
   return (
     <div className="container">

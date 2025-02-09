@@ -42,6 +42,7 @@ authorApp.get("/unauthorized", (req, res) => {
 //modify an article by article idd
 authorApp.put(
   "/article/:articleId",
+  requireAuth({ signInUrl: "unauthorized" }),
   expressAsyncHandler(async (req, res) => {
     //get modified article
     const modifiedArticle = req.body;
@@ -77,7 +78,7 @@ authorApp.put(
       }
     );
     //send res
-    res.status(200).send({ message: "article deleted", payload: dbRes });
+    res.status(200).send({ message: "article deleted or restored", payload: dbRes });
   })
 );
 
