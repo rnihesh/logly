@@ -22,35 +22,39 @@ function Home() {
     const selectedRole = e.target.value;
     currentUser.role = selectedRole;
     let res = null;
-    if (selectedRole === "author") {
-      res = await axios.post(
-        "http://localhost:3000/author-api/author",
-        currentUser
-      );
-      let { message, payload } = res.data;
-      if (message === "author") {
-        setCurrentUser({
-          ...currentUser,
-          ...payload,
-        });
-      } else {
-        setError(message);
+    try {
+      if (selectedRole === "author") {
+        res = await axios.post(
+          "http://localhost:3000/author-api/author",
+          currentUser
+        );
+        let { message, payload } = res.data;
+        if (message === "author") {
+          setCurrentUser({
+            ...currentUser,
+            ...payload,
+          });
+        } else {
+          setError(message);
+        }
       }
-    }
-    if (selectedRole === "user") {
-      res = await axios.post(
-        "http://localhost:3000/user-api/user",
-        currentUser
-      );
-      let { message, payload } = res.data;
-      if (message === "user") {
-        setCurrentUser({
-          ...currentUser,
-          ...payload,
-        });
-      } else {
-        setError(message);
+      if (selectedRole === "user") {
+        res = await axios.post(
+          "http://localhost:3000/user-api/user",
+          currentUser
+        );
+        let { message, payload } = res.data;
+        if (message === "user") {
+          setCurrentUser({
+            ...currentUser,
+            ...payload,
+          });
+        } else {
+          setError(message);
+        }
       }
+    } catch (error) {
+      setError(error.message);
     }
   }
   console.log("current user : ", currentUser);
@@ -66,7 +70,7 @@ function Home() {
 
   useEffect(() => {
     if (currentUser?.role === "user" && error.length === 0) {
-      navigate(`/user-profile/${currentuser.email}`);
+      navigate(`/user-profile/${currentUser.email}`);
     }
     if (currentUser?.role === "author" && error.length === 0) {
       navigate(`author-profile/${currentUser.email}`);

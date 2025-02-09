@@ -16,9 +16,10 @@ function ArticleByID() {
   const navigate = useNavigate();
   const { getToken } = useAuth();
   const [currentArticle, setCurrentArticle] = useState(state);
+  const [commentStatus, setCommentStatus] = useState("");
   // console.log(state);
 
-  //function to change edit status of article
+  //enable edit of article
   function enableEdit() {
     setEditArticleStatus(true);
   }
@@ -57,6 +58,21 @@ function ArticleByID() {
     }
 
     // console.log(modifiedArticle);
+  }
+
+  //add comment by user
+  async function addComment(commentObj) {
+    //add name of user to comment obj
+    commentObj.nameOfUser = currentUser.firstName;
+    console.log(commentObj);
+    //http put request
+    let res = await axios.put(
+      `http://localhost:3000/user-api/comment/${currentArticle.articleId}`,
+      commentObj
+    );
+    if (res.data.message === "comment added") {
+      setCommentStatus(res.data.message);
+    }
   }
 
   //delete article
@@ -165,6 +181,18 @@ function ArticleByID() {
               )}
             </div>
           </div>
+          {/* comment form */}
+          <h1>{commentStatus}</h1>
+          {currentUser.role === "user" && (
+            <form onSubmit={handleSubmit(addComment)}>
+              <input
+                type="text"
+                {...register("comment")}
+                className="form-control mb-4"
+              />
+              <button className="btn btn-success mb-4">Add a comment</button>
+            </form>
+          )}
         </>
       ) : (
         <>

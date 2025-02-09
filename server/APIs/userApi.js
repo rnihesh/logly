@@ -15,7 +15,7 @@ userApp.post("/user", expressAsyncHandler(createUserOrAuthor))
 userApp.put('/comment/:articleId', expressAsyncHandler(async(req, res)=>{
   //get comment obj
   const commentObj = req.body;
-  console.log(first)
+  
   //add commmentObj to comments array of article
   const articleWithComments = await Article.findOneAndUpdate(
     { articleId: req.params.articleId },
