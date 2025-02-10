@@ -50,28 +50,60 @@ function Header() {
               </li>
             </>
           ) : (
-            <div className="user-button">
-              <div style={{ position: "relative" }}>
-                <img
-                  src={user.imageUrl}
-                  alt=""
-                  width="40px"
-                  className="rounded-circle"
-                />
-                <p
-                  className="role"
-                  style={{ position: "absolute", top: "10px", right: "15px" }}
-                >
-                  {currentUser.role}
-                </p>
+            // <div className="user-button">
+            //   <div style={{ position: "relative" }}>
+            //     <img
+            //       src={user.imageUrl}
+            //       alt=""
+            //       width="40px"
+            //       className="rounded-circle"
+            //     />
+            //     <p
+            //       className="role"
+            //       style={{ position: "absolute", top: "10px", right: "15px" }}
+            //     >
+            //       {currentUser.role}
+            //     </p>
+            //   </div>
+            //   <p className="mb-0 user-name">{user.firstName}</p>
+            //   <button
+            //     className="btn btn-danger signout-btn"
+            //     onClick={handleSignout}
+            //   >
+            //     Signout
+            //   </button>
+            // </div>
+            <div className="">
+              <div className="row">
+                <div className="col">
+                  <img
+                    src={user.imageUrl}
+                    alt=""
+                    width="40px"
+                    className="rounded-circle"
+                  />
+                </div>
+                <div className="col">
+                  <p
+                    className="role text-center bg-success-subtle rounded"
+                  >
+                    {currentUser.role}
+                  </p>
+                </div>
               </div>
-              <p className="mb-0 user-name">{user.firstName}</p>
-              <button
-                className="btn btn-danger signout-btn"
-                onClick={handleSignout}
-              >
-                Signout
-              </button>
+              <div className="row">
+                <div className="col">
+                  <p className="mb-0 mt-1 fw-bold user-name">{user.firstName}</p>
+                </div>
+                <div className="col">
+                  <button
+                    className="btn btn-outline-danger signout-btn"
+                    onClick={handleSignout}
+                  >
+                    Signout
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </ul>

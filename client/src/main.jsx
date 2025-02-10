@@ -18,6 +18,9 @@ import AuthorProfile from "./components/author/AuthorProfile.jsx";
 import PostArticle from "./components/author/PostArticle.jsx";
 import UserProfile from "./components/user/UserProfile.jsx";
 import UserAuthorContext from "./contexts/UserAuthorContext.jsx";
+import AdminContext from "./contexts/AdminContext.jsx";
+import AdminProfile from "./components/admin/AdminProfile.jsx";
+import UserList from "./components/admin/UserList.jsx";
 
 const browserRouterObj = createBrowserRouter(
   [
@@ -77,6 +80,20 @@ const browserRouterObj = createBrowserRouter(
             },
           ],
         },
+        {
+          path: "admin-profile/:email",
+          element: <AdminProfile />,
+          children: [
+            {
+              path: "users",
+              element: <UserList />,
+            },
+            {
+              path: "",
+              element: <UserList />,
+            },
+          ],
+        },
       ],
     },
   ],
@@ -89,13 +106,15 @@ const browserRouterObj = createBrowserRouter(
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <UserAuthorContext>
-      <RouterProvider
-        router={browserRouterObj}
-        future={{
-          v7_startTransition: true,
-        }}
-      />
-    </UserAuthorContext>
+    <AdminContext>
+      <UserAuthorContext>
+        <RouterProvider
+          router={browserRouterObj}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
+      </UserAuthorContext>
+    </AdminContext>
   </StrictMode>
 );

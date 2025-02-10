@@ -1,12 +1,14 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { userAuthorContextObj } from "../../contexts/UserAuthorContext.jsx";
+import { adminContextObj } from "../../contexts/AdminContext.jsx";
 import { useUser, useAuth } from "@clerk/clerk-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { currentUser, setCurrentUser } = useContext(userAuthorContextObj);
+  const { currentAdmin, setCurrentAdmin } = useContext(adminContextObj);
 
   const { isSignedIn, user, isLoaded } = useUser();
   const [error, setError] = useState("");
@@ -21,6 +23,7 @@ function Home() {
     setError("");
     const selectedRole = e.target.value;
     currentUser.role = selectedRole;
+    currentAdmin.role = selectedRole;
     let res = null;
     try {
       if (selectedRole === "author") {
@@ -57,14 +60,41 @@ function Home() {
           setError(message);
         }
       }
+      if (selectedRole === "admin") {
+        res = await axios.post(
+          "http://localhost:3000/admin-api/admin",
+          currentAdmin
+        );
+        let { message, payload } = res.data;
+        console.log(message);
+        if (message === "admin") {
+          setCurrentAdmin({
+            ...currentAdmin,
+            ...payload,
+          });
+          //save user to local storage
+          localStorage.setItem("currentadmin", JSON.stringify(payload));
+        } else {
+          setError(message);
+        }
+      }
     } catch (error) {
       setError(error.message);
     }
   }
   console.log("current user : ", currentUser);
+  console.log("current admin: ", currentAdmin);
+  
   useEffect(() => {
     setCurrentUser({
       ...currentUser,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      email: user?.emailAddresses[0].emailAddress,
+      profileImageUrl: user?.imageUrl,
+    });
+    setCurrentAdmin({
+      ...currentAdmin,
       firstName: user?.firstName,
       lastName: user?.lastName,
       email: user?.emailAddresses[0].emailAddress,
@@ -74,12 +104,15 @@ function Home() {
 
   useEffect(() => {
     if (currentUser?.role === "user" && error.length === 0) {
-      navigate(`/user-profile/${currentUser.email}`);
+      navigate(`user-profile/${currentUser.email}`);
     }
     if (currentUser?.role === "author" && error.length === 0) {
       navigate(`author-profile/${currentUser.email}`);
     }
-  }, [currentUser]);
+    if (currentAdmin?.role === "admin" && error.length === 0) {
+      navigate(`admin-profile/${currentAdmin.email}`);
+    }
+  }, [currentUser, currentAdmin]);
 
   return (
     <div className="container">
@@ -165,7 +198,7 @@ function Home() {
                 Author
               </label>
             </div>
-            <div className="form-check">
+            <div className="form-check me-4">
               <input
                 type="radio"
                 name="role"
@@ -176,6 +209,19 @@ function Home() {
               />
               <label htmlFor="user" className="form-check-label">
                 User
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                name="role"
+                value="admin"
+                id="admin"
+                className="form-check-input"
+                onChange={onSelectRole}
+              />
+              <label htmlFor="admin" className="form-check-label">
+                Admin
               </label>
             </div>
           </div>

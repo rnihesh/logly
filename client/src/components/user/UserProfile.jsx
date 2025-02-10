@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { userAuthorContextObj } from "../../contexts/UserAuthorContext";
 
 function UserProfile() {
+  const { currentUser } = useContext(userAuthorContextObj);
+  
   return (
     <div>
       <ul className="d-flex justify-content-around list-unstyled fs-1">
@@ -11,9 +14,15 @@ function UserProfile() {
           </Link>
         </li>
       </ul>
-      <div className="mt-5">
-        <Outlet />
-      </div>
+      {currentUser.isActive ? (
+        <div className="mt-5">
+          <Outlet />
+        </div>
+      ) : (
+        <p className="text-center text-danger mt-5">
+          Your account is inactive. Please contact support.
+        </p>
+      )}
     </div>
   );
 }
