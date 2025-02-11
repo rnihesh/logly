@@ -63,7 +63,7 @@ function UserList() {
                         <div>
                           <p className="text-secondary">{userObj.firstName}</p>
                         </div>
-                        <div  className="text-center">
+                        <div className="text-center">
                           <p className="text-danger">{userObj.role}</p>
                         </div>
                         <div>

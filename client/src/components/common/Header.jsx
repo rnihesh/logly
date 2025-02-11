@@ -21,7 +21,7 @@ function Header() {
   return (
     <div>
       <nav className="header d-flex justify-content-between align-items-center p-1">
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center align-items-center">
           <Link to="/">
             <img
               src="https://cdn.worldvectorlogo.com/logos/svg-2.svg"
@@ -50,32 +50,9 @@ function Header() {
               </li>
             </>
           ) : (
-            // <div className="user-button">
-            //   <div style={{ position: "relative" }}>
-            //     <img
-            //       src={user.imageUrl}
-            //       alt=""
-            //       width="40px"
-            //       className="rounded-circle"
-            //     />
-            //     <p
-            //       className="role"
-            //       style={{ position: "absolute", top: "10px", right: "15px" }}
-            //     >
-            //       {currentUser.role}
-            //     </p>
-            //   </div>
-            //   <p className="mb-0 user-name">{user.firstName}</p>
-            //   <button
-            //     className="btn btn-danger signout-btn"
-            //     onClick={handleSignout}
-            //   >
-            //     Signout
-            //   </button>
-            // </div>
             <div className="">
-              <div className="row">
-                <div className="col">
+              <div className="row d-flex justify-content-center align-items-center">
+                <div className="col d-flex  align-items-center">
                   <img
                     src={user.imageUrl}
                     alt=""
@@ -83,19 +60,19 @@ function Header() {
                     className="rounded-circle"
                   />
                 </div>
-                <div className="col">
-                  <p
-                    className="role text-center bg-success-subtle rounded"
-                  >
+                <div className="col d-flex justify-content-center align-items-center">
+                  <p className=" text-center bg-success-subtle rounded-3 mb-0 p-1">
                     {currentUser.role}
                   </p>
                 </div>
               </div>
-              <div className="row">
-                <div className="col">
-                  <p className="mb-0 mt-1 fw-bold user-name">{user.firstName}</p>
+              <div className="row d-flex justify-content-center align-items-center">
+                <div className="col d-flex justify-content-center align-items-center">
+                  <p className="mb-0 mt-1 fw-bold user-name">
+                    {user.firstName}
+                  </p>
                 </div>
-                <div className="col">
+                <div className="col d-flex justify-content-center align-items-center">
                   <button
                     className="btn btn-outline-danger signout-btn"
                     onClick={handleSignout}

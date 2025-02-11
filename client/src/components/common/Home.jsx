@@ -12,6 +12,7 @@ function Home() {
 
   const { isSignedIn, user, isLoaded } = useUser();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // console.log("isSignedIn :", isSignedIn);
@@ -84,8 +85,12 @@ function Home() {
   }
   console.log("current user : ", currentUser);
   console.log("current admin: ", currentAdmin);
-  
+
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+
     setCurrentUser({
       ...currentUser,
       firstName: user?.firstName,
@@ -100,6 +105,9 @@ function Home() {
       email: user?.emailAddresses[0].emailAddress,
       profileImageUrl: user?.imageUrl,
     });
+
+    return () => clearTimeout(timeoutId);
+
   }, [isLoaded]);
 
   useEffect(() => {
@@ -116,115 +124,128 @@ function Home() {
 
   return (
     <div className="container">
-      {isSignedIn === false && (
-        <div>
-          <p className="lead">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-            adipisci ratione aut id autem aliquid eligendi, odit aperiam quasi,
-            quisquam nisi veniam a! Commodi sit suscipit voluptates, excepturi,
-            quia quos praesentium distinctio fugit illum pariatur fuga maxime
-            nihil ducimus sapiente quas consectetur explicabo unde, voluptatibus
-            non fugiat sint? Facilis beatae, ab culpa obcaecati ullam
-            aspernatur. Numquam aliquam reiciendis cupiditate magni, expedita
-            itaque delectus accusamus sint unde aliquid soluta omnis quo. Quam
-            iste, cupiditate ipsa molestiae odio ducimus eius vero provident
-            fugiat in explicabo. Laboriosam praesentium aspernatur fuga soluta
-            vel placeat magnam sint consequuntur recusandae quae, et at, vero ut
-            necessitatibus!
-          </p>
-          <p className="lead">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-            adipisci ratione aut id autem aliquid eligendi, odit aperiam quasi,
-            quisquam nisi veniam a! Commodi sit suscipit voluptates, excepturi,
-            quia quos praesentium distinctio fugit illum pariatur fuga maxime
-            nihil ducimus sapiente quas consectetur explicabo unde, voluptatibus
-            non fugiat sint? Facilis beatae, ab culpa obcaecati ullam
-            aspernatur. Numquam aliquam reiciendis cupiditate magni, expedita
-            itaque delectus accusamus sint unde aliquid soluta omnis quo. Quam
-            iste, cupiditate ipsa molestiae odio ducimus eius vero provident
-            fugiat in explicabo. Laboriosam praesentium aspernatur fuga soluta
-            vel placeat magnam sint consequuntur recusandae quae, et at, vero ut
-            necessitatibus!
-          </p>
-          <p className="lead">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-            adipisci ratione aut id autem aliquid eligendi, odit aperiam quasi,
-            quisquam nisi veniam a! Commodi sit suscipit voluptates, excepturi,
-            quia quos praesentium distinctio fugit illum pariatur fuga maxime
-            nihil ducimus sapiente quas consectetur explicabo unde, voluptatibus
-            non fugiat sint? Facilis beatae, ab culpa obcaecati ullam
-            aspernatur. Numquam aliquam reiciendis cupiditate magni, expedita
-            itaque delectus accusamus sint unde aliquid soluta omnis quo. Quam
-            iste, cupiditate ipsa molestiae odio ducimus eius vero provident
-            fugiat in explicabo. Laboriosam praesentium aspernatur fuga soluta
-            vel placeat magnam sint consequuntur recusandae quae, et at, vero ut
-            necessitatibus!
-          </p>
+      {loading ? (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-grow " role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
-      )}
-      {isSignedIn === true && (
+      ) : (
         <div>
-          <div className="d-flex justify-content-evenly bg-info p-3">
-            <img
-              src={user.imageUrl}
-              width="100px"
-              height="100px"
-              className="rounded-circle"
-            />
-            <p className="display-6">
-              {user.firstName} <br /> {user.emailAddresses[0].emailAddress}
-            </p>
-          </div>
-          <p className="lead">Select role</p>
-          {error.length !== 0 && (
-            <p
-              className="text-danger fs-5 font-monospace"
-              style={{ fontFamily: "sans-serif" }}
-            >
-              {error}
-            </p>
+          {isSignedIn === false && (
+            <div>
+              <p className="lead">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi adipisci ratione aut id autem aliquid eligendi, odit
+                aperiam quasi, quisquam nisi veniam a! Commodi sit suscipit
+                voluptates, excepturi, quia quos praesentium distinctio fugit
+                illum pariatur fuga maxime nihil ducimus sapiente quas
+                consectetur explicabo unde, voluptatibus non fugiat sint?
+                Facilis beatae, ab culpa obcaecati ullam aspernatur. Numquam
+                aliquam reiciendis cupiditate magni, expedita itaque delectus
+                accusamus sint unde aliquid soluta omnis quo. Quam iste,
+                cupiditate ipsa molestiae odio ducimus eius vero provident
+                fugiat in explicabo. Laboriosam praesentium aspernatur fuga
+                soluta vel placeat magnam sint consequuntur recusandae quae, et
+                at, vero ut necessitatibus!
+              </p>
+              <p className="lead">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi adipisci ratione aut id autem aliquid eligendi, odit
+                aperiam quasi, quisquam nisi veniam a! Commodi sit suscipit
+                voluptates, excepturi, quia quos praesentium distinctio fugit
+                illum pariatur fuga maxime nihil ducimus sapiente quas
+                consectetur explicabo unde, voluptatibus non fugiat sint?
+                Facilis beatae, ab culpa obcaecati ullam aspernatur. Numquam
+                aliquam reiciendis cupiditate magni, expedita itaque delectus
+                accusamus sint unde aliquid soluta omnis quo. Quam iste,
+                cupiditate ipsa molestiae odio ducimus eius vero provident
+                fugiat in explicabo. Laboriosam praesentium aspernatur fuga
+                soluta vel placeat magnam sint consequuntur recusandae quae, et
+                at, vero ut necessitatibus!
+              </p>
+              <p className="lead">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi adipisci ratione aut id autem aliquid eligendi, odit
+                aperiam quasi, quisquam nisi veniam a! Commodi sit suscipit
+                voluptates, excepturi, quia quos praesentium distinctio fugit
+                illum pariatur fuga maxime nihil ducimus sapiente quas
+                consectetur explicabo unde, voluptatibus non fugiat sint?
+                Facilis beatae, ab culpa obcaecati ullam aspernatur. Numquam
+                aliquam reiciendis cupiditate magni, expedita itaque delectus
+                accusamus sint unde aliquid soluta omnis quo. Quam iste,
+                cupiditate ipsa molestiae odio ducimus eius vero provident
+                fugiat in explicabo. Laboriosam praesentium aspernatur fuga
+                soluta vel placeat magnam sint consequuntur recusandae quae, et
+                at, vero ut necessitatibus!
+              </p>
+            </div>
           )}
-          <div className="d-flex role-radio py-3 justify-content-center">
-            <div className="form-check me-4">
-              <input
-                type="radio"
-                name="role"
-                value="author"
-                id="author"
-                className="form-check-input"
-                onChange={onSelectRole}
-              />
-              <label htmlFor="author" className="form-check-label">
-                Author
-              </label>
+          {isSignedIn === true && (
+            <div>
+              <div className="d-flex justify-content-evenly bg-info p-3">
+                <img
+                  src={user.imageUrl}
+                  width="100px"
+                  height="100px"
+                  className="rounded-circle"
+                />
+                <p className="display-6">
+                  {user.firstName} <br /> {user.emailAddresses[0].emailAddress}
+                </p>
+              </div>
+              <p className="lead">Select role</p>
+              {error.length !== 0 && (
+                <p
+                  className="text-danger fs-5 font-monospace"
+                  style={{ fontFamily: "sans-serif" }}
+                >
+                  {error}
+                </p>
+              )}
+              <div className="d-flex role-radio py-3 justify-content-center">
+                <div className="form-check me-4">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="author"
+                    id="author"
+                    className="form-check-input"
+                    onChange={onSelectRole}
+                  />
+                  <label htmlFor="author" className="form-check-label">
+                    Author
+                  </label>
+                </div>
+                <div className="form-check me-4">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="user"
+                    id="user"
+                    className="form-check-input"
+                    onChange={onSelectRole}
+                  />
+                  <label htmlFor="user" className="form-check-label">
+                    User
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="admin"
+                    id="admin"
+                    className="form-check-input"
+                    onChange={onSelectRole}
+                  />
+                  <label htmlFor="admin" className="form-check-label">
+                    Admin
+                  </label>
+                </div>
+              </div>
             </div>
-            <div className="form-check me-4">
-              <input
-                type="radio"
-                name="role"
-                value="user"
-                id="user"
-                className="form-check-input"
-                onChange={onSelectRole}
-              />
-              <label htmlFor="user" className="form-check-label">
-                User
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                type="radio"
-                name="role"
-                value="admin"
-                id="admin"
-                className="form-check-input"
-                onChange={onSelectRole}
-              />
-              <label htmlFor="admin" className="form-check-label">
-                Admin
-              </label>
-            </div>
-          </div>
+          )}
         </div>
       )}
     </div>

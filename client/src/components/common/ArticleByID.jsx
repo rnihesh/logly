@@ -130,10 +130,9 @@ function ArticleByID() {
                 <p>{state.authorData.nameOfAuthor}</p>
               </div>
             </div>
-
             {/* edit and delete buttons */}
             {currentUser.role === "author" && (
-              <div className="d-flex me-3">
+              <div className="d-flex me-3 ms-2 " style={{ height: "100%" }}>
                 <button className="me-2 btn btn-light" onClick={enableEdit}>
                   <FaEdit className="text-warning" />
                 </button>
