@@ -68,15 +68,15 @@ function PostArticle() {
   }
   return (
     <div className="container ">
-      <div className="row justify-content-center mt-5">
+      <div className="row justify-content-center mt-2">
         <div className="col-lg-8 col-md-8 col-sm-10">
           <div className="card shadow">
             <div className="card-title text-center border-bottom">
-              <h2 className="p-3 " style={{ color: "goldenrod" }}>
+              <h2 className="p-3 " style={{ color: "#667085" }}>
                 Write an Article
               </h2>
             </div>
-            <div className="card-body bg-light">
+            <div className="card-body ">
               {/* {err.length!==0&&<p className='text-danger fs-5'>{err}</p>} */}
               <form onSubmit={handleSubmit(postArticle)}>
                 <div className="mb-4">
@@ -99,7 +99,7 @@ function PostArticle() {
                   <select
                     {...register("category")}
                     id="category"
-                    className="form-select"
+                    className="form-select form-control"
                     defaultValue=""
                   >
                     <option value="" disabled>
@@ -111,6 +111,7 @@ function PostArticle() {
                   </select>
                   {/* title validation err msg */}
                 </div>
+
                 <div className="mb-4">
                   <label htmlFor="content" className="form-label">
                     Content
@@ -125,7 +126,7 @@ function PostArticle() {
                 </div>
 
                 <div className="text-end">
-                  <button type="submit" className="add-article-btn">
+                  <button type="submit" className="submit-btn">
                     Post
                   </button>
                 </div>

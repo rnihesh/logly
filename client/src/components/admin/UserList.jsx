@@ -36,109 +36,67 @@ function UserList() {
   }, []);
 
   return (
-    <div className="container">
-      <div>
-        {error.length !== 0 && (
-          <p className="display-4 text-center mt-5">{error}</p>
+    <div className="admin-container">
+      {error.length !== 0 && <p className="admin-error">{error}</p>}
+
+      <div className="admin-section">
+        <h2 className="admin-title">Active Users</h2>
+        {users.some((user) => user.isActive) ? (
+          users.map(
+            (user, i) =>
+              user.isActive && (
+                <div className="admin-user-card m-3" key={i}>
+                  <img
+                    src={user.profileImageUrl}
+                    alt="Profile"
+                    width="100px"
+                    className="admin-user-img"
+                  />
+                  <p className="admin-user-name">{user.firstName}</p>
+                  <p className="admin-user-role">{user.role}</p>
+                  <p className="admin-user-status">Active</p>
+                  <button
+                    className="admin-btn admin-btn-disable"
+                    onClick={() => toggleDisableEnable(user)}
+                  >
+                    Disable
+                  </button>
+                </div>
+              )
+          )
+        ) : (
+          <p className="admin-no-users">No Active Users</p>
         )}
+      </div>
 
-        <div className="container text-center">
-          <p className="display-4">Active users</p>
-
-          {users.some((userObj) => userObj.isActive) ? (
-            users.map(
-              (userObj, i) =>
-                userObj.isActive === true && (
-                  <div className="row" key={i}>
-                    <div className="col g-2 px-4 py-4 bg-warning-subtle">
-                      <div className="d-flex justify-content-evenly align-items-center">
-                        <div>
-                          <img
-                            src={userObj.profileImageUrl}
-                            alt="ProfileImage"
-                            width="40px"
-                            className="rounded-circle"
-                          />
-                        </div>
-                        <div>
-                          <p className="text-secondary">{userObj.firstName}</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-danger">{userObj.role}</p>
-                        </div>
-                        <div>
-                          <p className="text-dark">
-                            {userObj.isActive === true ? "Active" : "Inactive"}
-                          </p>
-                        </div>
-                        <div>
-                          <button
-                            className="btn btn-outline-danger"
-                            onClick={() => toggleDisableEnable(userObj)}
-                          >
-                            Disable
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-            )
-          ) : (
-            <p className="lead ">No Active users</p>
-          )}
-        </div>
-
-        <div className="container text-center mt-4">
-          <p className="display-4">Inactive users</p>
-
-          {users.some((userObj) => !userObj.isActive) ? (
-            users.map(
-              (userObj, i) =>
-                userObj.isActive === false && (
-                  <div className="row" key={i}>
-                    <div className="col g-2 px-4 py-4 bg-warning-subtle rounded">
-                      <div className="d-flex justify-content-evenly align-items-center ">
-                        <div>
-                          <img
-                            src={userObj.profileImageUrl}
-                            alt="ProfileImage"
-                            width="40px"
-                            className="rounded-circle"
-                          />
-                        </div>
-                        <div className="">
-                          <p className="text-secondary text-center">
-                            {userObj.firstName}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-danger text-center">
-                            {userObj.role}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-dark">
-                            {userObj.isActive === true ? "Active" : "Inactive"}
-                          </p>
-                        </div>
-                        <div>
-                          <button
-                            className="btn btn-outline-success"
-                            onClick={() => toggleDisableEnable(userObj)}
-                          >
-                            Enable
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-            )
-          ) : (
-            <p className="lead ">No Inactive users</p>
-          )}
-        </div>
+      <div className="admin-section mt-5">
+        <h2 className="admin-title">Inactive Users</h2>
+        {users.some((user) => !user.isActive) ? (
+          users.map(
+            (user, i) =>
+              !user.isActive && (
+                <div className="admin-user-card m-3" key={i}>
+                  <img
+                    src={user.profileImageUrl}
+                    alt="Profile"
+                    width="100px"
+                    className="admin-user-img"
+                  />
+                  <p className="admin-user-name">{user.firstName}</p>
+                  <p className="admin-user-role">{user.role}</p>
+                  <p className="admin-user-status">Inactive</p>
+                  <button
+                    className="admin-btn admin-btn-enable"
+                    onClick={() => toggleDisableEnable(user)}
+                  >
+                    Enable
+                  </button>
+                </div>
+              )
+          )
+        ) : (
+          <p className="admin-no-users">No Inactive Users</p>
+        )}
       </div>
     </div>
   );

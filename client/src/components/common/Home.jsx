@@ -5,6 +5,12 @@ import { adminContextObj } from "../../contexts/AdminContext.jsx";
 import { useUser, useAuth } from "@clerk/clerk-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import writingIcon from "../../assets/writing.svg";
+import readIcon from "../../assets/read.svg";
+import CommunityIcon from "../../assets/community.svg";
+import AdminIcon from "../../assets/admin.svg";
+import UserIcon from "../../assets/user.svg";
+import AuthorIcon from "../../assets/author.svg";
 
 function Home() {
   const { currentUser, setCurrentUser } = useContext(userAuthorContextObj);
@@ -107,7 +113,6 @@ function Home() {
     });
 
     return () => clearTimeout(timeoutId);
-
   }, [isLoaded]);
 
   useEffect(() => {
@@ -126,122 +131,145 @@ function Home() {
     <div className="container">
       {loading ? (
         <div className="d-flex justify-content-center">
-          <div className="spinner-grow " role="status">
+          <div className="spinner-grow" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       ) : (
         <div>
           {isSignedIn === false && (
-            <div>
-              <p className="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi adipisci ratione aut id autem aliquid eligendi, odit
-                aperiam quasi, quisquam nisi veniam a! Commodi sit suscipit
-                voluptates, excepturi, quia quos praesentium distinctio fugit
-                illum pariatur fuga maxime nihil ducimus sapiente quas
-                consectetur explicabo unde, voluptatibus non fugiat sint?
-                Facilis beatae, ab culpa obcaecati ullam aspernatur. Numquam
-                aliquam reiciendis cupiditate magni, expedita itaque delectus
-                accusamus sint unde aliquid soluta omnis quo. Quam iste,
-                cupiditate ipsa molestiae odio ducimus eius vero provident
-                fugiat in explicabo. Laboriosam praesentium aspernatur fuga
-                soluta vel placeat magnam sint consequuntur recusandae quae, et
-                at, vero ut necessitatibus!
-              </p>
-              <p className="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi adipisci ratione aut id autem aliquid eligendi, odit
-                aperiam quasi, quisquam nisi veniam a! Commodi sit suscipit
-                voluptates, excepturi, quia quos praesentium distinctio fugit
-                illum pariatur fuga maxime nihil ducimus sapiente quas
-                consectetur explicabo unde, voluptatibus non fugiat sint?
-                Facilis beatae, ab culpa obcaecati ullam aspernatur. Numquam
-                aliquam reiciendis cupiditate magni, expedita itaque delectus
-                accusamus sint unde aliquid soluta omnis quo. Quam iste,
-                cupiditate ipsa molestiae odio ducimus eius vero provident
-                fugiat in explicabo. Laboriosam praesentium aspernatur fuga
-                soluta vel placeat magnam sint consequuntur recusandae quae, et
-                at, vero ut necessitatibus!
-              </p>
-              <p className="lead">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi adipisci ratione aut id autem aliquid eligendi, odit
-                aperiam quasi, quisquam nisi veniam a! Commodi sit suscipit
-                voluptates, excepturi, quia quos praesentium distinctio fugit
-                illum pariatur fuga maxime nihil ducimus sapiente quas
-                consectetur explicabo unde, voluptatibus non fugiat sint?
-                Facilis beatae, ab culpa obcaecati ullam aspernatur. Numquam
-                aliquam reiciendis cupiditate magni, expedita itaque delectus
-                accusamus sint unde aliquid soluta omnis quo. Quam iste,
-                cupiditate ipsa molestiae odio ducimus eius vero provident
-                fugiat in explicabo. Laboriosam praesentium aspernatur fuga
-                soluta vel placeat magnam sint consequuntur recusandae quae, et
-                at, vero ut necessitatibus!
-              </p>
+            <div className="home-item p-5 rounded-5">
+              <div className="welcome-section text-center mb-4">
+                <h3>Welcome to Logly</h3>
+                <p>Join the community to share your thoughts and ideas.</p>
+              </div>
+              <div className="info-section d-flex justify-content-around">
+                <div className="info-item text-center p-4 bg-light rounded-3">
+                  <img
+                    src={writingIcon}
+                    alt="Write Icon"
+                    className="info-icon mb-3"
+                  />
+                  <h5>Write Articles</h5>
+                  <p>
+                    Express your creativity by writing articles and sharing your
+                    knowledge.
+                  </p>
+                </div>
+                <div className="info-item text-center p-4 bg-light rounded-3">
+                  <img
+                    src={readIcon}
+                    alt="Read Icon"
+                    className="info-icon mb-3"
+                  />
+                  <h5>Read</h5>
+                  <p>
+                    Explore a wide variety of articles and learn from the
+                    community.
+                  </p>
+                </div>
+                <div className="info-item text-center p-4 bg-light rounded-3">
+                  <img
+                    src={CommunityIcon}
+                    alt="Community Icon"
+                    className="info-icon mb-3"
+                  />
+                  <h5>Community</h5>
+                  <p>Engage with like-minded people and grow together.</p>
+                </div>
+              </div>
             </div>
           )}
+
           {isSignedIn === true && (
-            <div>
-              <div className="d-flex justify-content-evenly bg-info p-3">
-                <img
-                  src={user.imageUrl}
-                  width="100px"
-                  height="100px"
-                  className="rounded-circle"
-                />
-                <p className="display-6">
-                  {user.firstName} <br /> {user.emailAddresses[0].emailAddress}
-                </p>
-              </div>
-              <p className="lead">Select role</p>
-              {error.length !== 0 && (
-                <p
-                  className="text-danger fs-5 font-monospace"
-                  style={{ fontFamily: "sans-serif" }}
-                >
-                  {error}
-                </p>
-              )}
-              <div className="d-flex role-radio py-3 justify-content-center">
-                <div className="form-check me-4">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="author"
-                    id="author"
-                    className="form-check-input"
-                    onChange={onSelectRole}
+            <div className="d-flex justify-content-center vov">
+              <div className="user-section p-5 rounded-5 w-75">
+                <div className="user-info2 d-flex justify-content-evenly align-items-center p-4 rounded-3 mb-4">
+                  <img
+                    src={user.imageUrl}
+                    width="100px"
+                    height="100px"
+                    className="rounded-circle"
+                    alt="User Profile"
                   />
-                  <label htmlFor="author" className="form-check-label">
-                    Author
-                  </label>
+                  <div className="user-details">
+                    <h5>
+                      Welcome "
+                      <span style={{ fontSize: "1.4rem", fontWeight: "bold" }}>
+                        {user.firstName}
+                      </span>
+                      " !!!
+                    </h5>
+                    <p>{user.emailAddresses[0].emailAddress}</p>
+                  </div>
                 </div>
-                <div className="form-check me-4">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="user"
-                    id="user"
-                    className="form-check-input"
-                    onChange={onSelectRole}
-                  />
-                  <label htmlFor="user" className="form-check-label">
-                    User
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="admin"
-                    id="admin"
-                    className="form-check-input"
-                    onChange={onSelectRole}
-                  />
-                  <label htmlFor="admin" className="form-check-label">
-                    Admin
-                  </label>
+
+                <div className="role-selection text-center">
+                  <p className="lead">Select your role</p>
+                  {error && (
+                    <p className="text-danger fs-5 font-monospace">{error}</p>
+                  )}
+                  <div className="role-buttons d-flex justify-content-center gap-4">
+                    <button
+                      className="role-btn d-flex flex-column align-items-center p-4"
+                      value="author"
+                      onClick={onSelectRole}
+                    >
+                      <img
+                        src={AuthorIcon}
+                        alt="authoricon"
+                        className="mb-2"
+                        width="100px"
+                      />
+                      <span style={{ fontWeight: "bolder" }}>Author</span>
+                      <span
+                        className="text-sm text-gray-500"
+                        style={{ fontSize: "0.9rem" }}
+                      >
+                        Write articles & share
+                      </span>
+                    </button>
+
+                    <button
+                      className="role-btn d-flex flex-column align-items-center p-4"
+                      value="user"
+                      onClick={onSelectRole}
+                    >
+                      <img
+                        src={UserIcon}
+                        alt="usericon"
+                        className="mb-2"
+                        width="100px"
+                      />
+                      <span style={{ fontWeight: "bolder" }}>User</span>
+                      <span
+                        className="text-sm text-gray-500"
+                        style={{ fontSize: "0.9rem" }}
+                      >
+                        Read articles & share
+                      </span>
+                    </button>
+
+                    <button
+                      className="role-btn d-flex flex-column align-items-center p-4"
+                      value="admin"
+                      onClick={onSelectRole}
+                    >
+                      <img
+                        src={AdminIcon}
+                        alt="adminicon"
+                        className="mb-2"
+                        width="100px"
+                      />
+                      <span style={{ fontWeight: "bolder" }}>Admin</span>
+                      <span
+                        className="text-sm text-gray-500"
+                        style={{ fontSize: "0.9rem" }}
+                      >
+                        Manage users & settings
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

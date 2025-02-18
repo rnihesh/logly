@@ -16,7 +16,7 @@ function RootLayout() {
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <div>
         <Header />
-        <div style={{ minHeight: "90vh" }}>
+        <div className="mt-5 " style={{ minHeight: "90vh", height: "100%" }}>
           <Outlet />
         </div>
         <Footer />

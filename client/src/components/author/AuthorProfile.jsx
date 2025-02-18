@@ -8,12 +8,22 @@ function AuthorProfile() {
     <div className="author-profile">
       <ul className="d-flex justify-content-around list-unstyled">
         <li className="nav-item">
-          <NavLink to="articles" className="nav-link">
+          <NavLink
+            to="articles"
+            className={({ isActive }) =>
+              isActive ? "nav-link active-link" : "nav-link"
+            }
+          >
             Articles
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="article" className="nav-link">
+          <NavLink
+            to="article"
+            className={({ isActive }) =>
+              isActive ? "nav-link active-link" : "nav-link"
+            }
+          >
             Add new article
           </NavLink>
         </li>

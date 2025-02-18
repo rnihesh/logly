@@ -19,9 +19,9 @@ function Header() {
   }
 
   return (
-    <div>
-      <nav className="header d-flex justify-content-between align-items-center p-1">
-        <div className="d-flex justify-content-center align-items-center">
+    <div className="header-container mb-3">
+      <nav className="navbar d-flex justify-content-between align-items-center p-2 shadow">
+        <div className="logo-container d-flex justify-content-center align-items-center">
           <Link to="/">
             <img
               src="https://cdn.worldvectorlogo.com/logos/svg-2.svg"
@@ -30,57 +30,45 @@ function Header() {
             />
           </Link>
         </div>
-        <ul className="d-flex justify-content-around align-items-center m-1 list-unstyled header-links">
+        <ul className="nav-links d-flex justify-content-around align-items-center m-1 list-unstyled">
           {!isSignedIn ? (
             <>
               <li>
-                <Link to="" className="link me-4">
+                <Link to="" className="nav-item link me-4">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="signin" className="link me-4">
+                <Link to="signin" className="nav-item link me-4">
                   Signin
                 </Link>
               </li>
               <li>
-                <Link to="signup" className="link me-4">
+                <Link to="signup" className="nav-item link me-4">
                   Signup
                 </Link>
               </li>
             </>
           ) : (
-            <div className="">
-              <div className="row d-flex justify-content-center align-items-center">
-                <div className="col d-flex  align-items-center">
-                  <img
-                    src={user.imageUrl}
-                    alt=""
-                    width="40px"
-                    className="rounded-circle"
-                  />
-                </div>
-                <div className="col d-flex justify-content-center align-items-center">
-                  <p className=" text-center bg-success-subtle rounded-3 mb-0 p-1">
-                    {currentUser.role}
-                  </p>
-                </div>
+            <div className="user-info d-flex align-items-center">
+              <img
+                src={user.imageUrl}
+                alt=""
+                width="45px"
+                className="user-avatar rounded-circle border"
+              />
+              <div className="user-details">
+                <p className="user-role text-center  rounded-3 mb-1 p-1">
+                  {currentUser.role}
+                </p>
+                <p className="user-name mb-0 fw-bold">{user.firstName}</p>
               </div>
-              <div className="row d-flex justify-content-center align-items-center">
-                <div className="col d-flex justify-content-center align-items-center">
-                  <p className="mb-0 mt-1 fw-bold user-name">
-                    {user.firstName}
-                  </p>
-                </div>
-                <div className="col d-flex justify-content-center align-items-center">
-                  <button
-                    className="btn btn-outline-danger signout-btn"
-                    onClick={handleSignout}
-                  >
-                    Signout
-                  </button>
-                </div>
-              </div>
+              <button
+                className="btn-signout btn btn-outline-danger"
+                onClick={handleSignout}
+              >
+                Signout
+              </button>
             </div>
           )}
         </ul>
