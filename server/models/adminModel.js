@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
-
+require("dotenv").config();
 
 const adminSchema = new Schema(
   {
@@ -19,6 +19,12 @@ const adminSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      validate: {
+        validator: function (v) {
+          return v === process.env.ADMIN_EMAIL;
+        },
+        message: "Invalid admin",
+      },
     },
     profileImageUrl: {
       type: String,
