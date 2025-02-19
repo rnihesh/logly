@@ -41,6 +41,13 @@
     z-index: 1000;
 }
 
+@media (max-width: 177px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 /* Navigation Bar */
 .navbar {
     display: flex;
@@ -99,6 +106,15 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
 }
+@media (max-width: 350px) {
+  .user-info {
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 10px;
+  }
+}
+
+
 
 .user-info:hover {
     flex-direction: row;
@@ -280,9 +296,54 @@
   
   
   
-  .info-section .info-item {
-    width: 30%;
+  .vov {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
   }
+  
+  .user-section {
+    background-color: #fff;
+    width: 100%;
+    max-width: 1000px;
+    border: solid 1px #667085;
+    border-radius: 10px;
+  }
+  
+  .user-info2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .user-info2:hover {
+    transform: scale(1.05);
+  }
+  
+  .user-info2 img {
+    max-width: 100px;
+    border-radius: 50%;
+  }
+  
+  .user-details h5 {
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .user-details p {
+    font-size: 1rem;
+    color: #08090A;
+    text-align: center;
+  }
+  
   .role-selection p {
     font-size: 1.5rem;
     color: #08090A;
@@ -290,48 +351,66 @@
   
   .role-buttons {
     display: flex;
-    gap: 15px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
   }
   
   .role-btn {
-    /* background-color: #667085; */
+    background-color: transparent;
     color: #08090A;
-    border: none;
+    border: 1px solid #667085;
     padding: 10px 20px;
-    font-size: 1.2rem;
-    width: 25%;
+    font-size: 1rem;
+    width: 150px;
     border-radius: 5px;
     cursor: pointer;
-    /* transition: transform 0.5s ease; */
+    transition: transform 0.3s ease;
+    text-align: center;
   }
   
   .role-btn:hover {
-    /* transform: scale(1.1); */
-    border: solid 1px #667085;
+    transform: translateY(-5px);
   }
-
-  .user-section{
-    border: solid 1px #667085 ;
-    background-color: #fff;
-    
+  
+  .role-btn img {
+    width: 60px;
+    margin-bottom: 10px;
   }
-
-  .user-info2 {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    /* background-color: #f0f0f0; */
-    color: black;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    transition: transform 1.5s ease;
+  
+  @media (max-width: 992px) {
+    .user-info2 {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .role-buttons {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .role-btn {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .role-btn img {
+      width: 80px;
+    }
   }
-  .user-info2:hover {
-    flex-direction: row;
-    transform: scale(1.05);
-    font-size: 1rem;
-}
+  
+  @media (max-width: 576px) {
+    .user-info2 {
+      padding: 10px;
+    }
+  
+    .role-btn {
+      font-size: 1.1rem;
+      width: 100%;
+    }
+  }
+  
+  
 /* .vov{
     overflow: scroll;
 }
@@ -798,8 +877,10 @@ label {
     gap: 10px;
     align-items: center;
   }
+  .contact-info{
+    word-wrap: break-word;
+  }
 }
-
 
 
 
@@ -877,7 +958,8 @@ label {
   margin: auto;
   padding: 20px;
 }
-.admin-container img{
+
+.admin-container img {
   border-radius: 50%;
   width: 100px;
   flex-shrink: 0;
@@ -906,13 +988,12 @@ label {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: var(--admin-bg, #f9fafb);
   transition: transform 0.2s ease-in-out;
+  margin-bottom: 15px;
 }
 
 .admin-user-card:hover {
   transform: scale(1.02);
 }
-
-
 
 .admin-user-name {
   font-weight: bold;
@@ -925,10 +1006,11 @@ label {
   color: #888;
 }
 
-
-
-
-
+.admin-user-status {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #4caf50;
+}
 
 .admin-btn {
   padding: 8px 15px;
@@ -955,4 +1037,63 @@ label {
 
 .admin-btn-enable:hover {
   background-color: #3d8b40;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 15px;
+  }
+
+  .admin-user-card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 10px;
+  }
+
+  .admin-user-card img {
+    width: 80px;
+    margin-bottom: 10px;
+  }
+
+  .admin-user-name,
+  .admin-user-role,
+  .admin-user-status {
+    font-size: 0.9rem;
+  }
+
+  .admin-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .admin-section {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-header {
+    font-size: 1.5rem;
+  }
+
+  .admin-user-card {
+    padding: 8px;
+  }
+
+  .admin-user-name {
+    font-size: 1rem;
+  }
+
+  .admin-user-role,
+  .admin-user-status {
+    font-size: 0.8rem;
+  }
+
+  .admin-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
 }

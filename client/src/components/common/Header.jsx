@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import { userAuthorContextObj } from "../../contexts/UserAuthorContext.jsx";
+import TypeWrite from "../../assets/typewriter.png";
 
 function Header() {
   const { signOut } = useClerk();
@@ -23,11 +24,7 @@ function Header() {
       <nav className="navbar d-flex justify-content-between align-items-center p-2 shadow">
         <div className="logo-container d-flex justify-content-center align-items-center">
           <Link to="/">
-            <img
-              src="https://cdn.worldvectorlogo.com/logos/svg-2.svg"
-              alt="logo"
-              className="logo"
-            />
+            <img src={TypeWrite} alt="logo" className="logo" />
           </Link>
         </div>
         <ul className="nav-links d-flex justify-content-around align-items-center m-1 list-unstyled">
