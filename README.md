@@ -1,4 +1,4 @@
-# Blog Application Capstone Project
+# Logly - Blog Application
 
 A full-stack blog application for creating and managing blog posts.
 
@@ -37,6 +37,10 @@ A full-stack blog application for creating and managing blog posts.
 ├── server/         # Backend Node.js server
 └── README.md
 ```
+
+## Deployment
+
+The application is deployed at: [logly.vercel.app](https://logly.vercel.app)
 
 ## Contributing
 
