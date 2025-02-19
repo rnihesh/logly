@@ -113,6 +113,12 @@
     padding: 12px 10px;
   }
 }
+@media (max-width: 380px) {
+  .role-buttons img {
+    width: 10px;
+    overflow: hidden;
+  }
+}
 
 
 
@@ -306,7 +312,7 @@
   .user-section {
     background-color: #fff;
     width: 100%;
-    max-width: 1000px;
+    max-width: 70%;
     border: solid 1px #667085;
     border-radius: 10px;
   }
