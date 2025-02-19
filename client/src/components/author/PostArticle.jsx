@@ -4,6 +4,7 @@ import { userAuthorContextObj } from "../../contexts/UserAuthorContext";
 import axios from "axios";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { getBaseUrl } from "../../utils/config.js";
 
 function PostArticle() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function PostArticle() {
   const { currentUser } = useContext(userAuthorContextObj);
 
   async function postArticle(articleObj) {
-    console.log(articleObj);
+    // console.log(articleObj);
     //create article object as per article schema
     const authorData = {
       nameOfAuthor: currentUser.firstName,
@@ -51,12 +52,12 @@ function PostArticle() {
     articleObj.comments = [];
     //add article active state
     articleObj.isArticleActive = true;
-    console.log(articleObj);
+    // console.log(articleObj);
 
     //make HTTP POST req to create new article in backend
 
     let res = await axios.post(
-      "http://localhost:3000/author-api/article",
+      `${getBaseUrl()}/author-api/article`,
       articleObj
     );
     if (res.status === 201) {

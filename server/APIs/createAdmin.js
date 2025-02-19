@@ -5,8 +5,8 @@ async function createAdmin(req, res) {
   const newAdmin = req.body;
   const userInDb = await Admin.findOne({ email: newAdmin.email });
   const userInUserAuthor = await UserAuthor.findOne({ email: newAdmin.email });
-  console.log("userindb : ", userInDb);
-  console.log("userinauthor: ", userInUserAuthor);
+  // console.log("userindb : ", userInDb);
+  // console.log("userinauthor: ", userInUserAuthor);
 
   if (userInDb !== null) {
     if (newAdmin.role === userInDb.role) {

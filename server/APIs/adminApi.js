@@ -12,7 +12,7 @@ adminApp.get(
   expressAsyncHandler(async (req, res) => {
     //read all users
     const listOfUsers = await UserAuthor.find();
-    console.log(listOfUsers)
+    // console.log(listOfUsers)
     res.status(200).send({ message: "users", payload: listOfUsers });
   })
 );

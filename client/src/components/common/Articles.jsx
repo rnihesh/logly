@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
 import { useForm } from "react-hook-form";
+import { getBaseUrl } from "../../utils/config.js";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
@@ -22,7 +23,7 @@ function Articles() {
     //get jwt token
     const token = await getToken();
     //make authenticated request
-    let res = await axios.get("http://localhost:3000/author-api/articles", {
+    let res = await axios.get(`${getBaseUrl()}/author-api/articles`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -43,7 +44,7 @@ function Articles() {
   useEffect(() => {
     getArticles();
   }, []);
-  console.log(articles);
+  // console.log(articles);
 
   //filter
   // useEffect(() => {

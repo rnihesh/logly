@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { adminContextObj } from "../../contexts/AdminContext";
+import { getBaseUrl } from "../../utils/config.js";
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -11,7 +12,7 @@ function UserList() {
     const updatedStatus = !userObj.isActive;
     userObj.isActive = updatedStatus;
     let res = await axios.put(
-      `http://localhost:3000/admin-api/user/${userObj._id}`,
+      `${getBaseUrl()}/admin-api/user/${userObj._id}`,
       { ...userObj }
     );
     if (res.data.message === "updated") {
@@ -21,8 +22,8 @@ function UserList() {
 
   //get all users
   async function getUsers() {
-    let res = await axios.get("http://localhost:3000/admin-api/users");
-    console.log("users for admin: ", res.data.payload);
+    let res = await axios.get(`${getBaseUrl()}/admin-api/users`);
+    // console.log("users for admin: ", res.data.payload);
     if (res.data.message === "users") {
       setUsers(res.data.payload);
       setError("");

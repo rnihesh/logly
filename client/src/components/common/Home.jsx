@@ -11,6 +11,7 @@ import CommunityIcon from "../../assets/community.svg";
 import AdminIcon from "../../assets/admin.svg";
 import UserIcon from "../../assets/user.svg";
 import AuthorIcon from "../../assets/author.svg";
+import { getBaseUrl } from "../../utils/config.js";
 
 function Home() {
   const { currentUser, setCurrentUser } = useContext(userAuthorContextObj);
@@ -22,7 +23,7 @@ function Home() {
   const navigate = useNavigate();
 
   // console.log("isSignedIn :", isSignedIn);
-  console.log("user :", user);
+  // console.log("user :", user);
   // console.log("isLoaded :", isLoaded);
 
   async function onSelectRole(e) {
@@ -35,7 +36,7 @@ function Home() {
     try {
       if (selectedRole === "author") {
         res = await axios.post(
-          "http://localhost:3000/author-api/author",
+          `${getBaseUrl()}/author-api/author`,
           currentUser
         );
         let { message, payload } = res.data;
@@ -52,7 +53,7 @@ function Home() {
       }
       if (selectedRole === "user") {
         res = await axios.post(
-          "http://localhost:3000/user-api/user",
+          `${getBaseUrl()}/user-api/user`,
           currentUser
         );
         let { message, payload } = res.data;
@@ -69,11 +70,11 @@ function Home() {
       }
       if (selectedRole === "admin") {
         res = await axios.post(
-          "http://localhost:3000/admin-api/admin",
+          `${getBaseUrl()}/admin-api/admin`,
           currentAdmin
         );
         let { message, payload } = res.data;
-        console.log(message);
+        // console.log(message);
         if (message === "admin") {
           setCurrentAdmin({
             ...currentAdmin,
@@ -89,8 +90,8 @@ function Home() {
       setError(error.message);
     }
   }
-  console.log("current user : ", currentUser);
-  console.log("current admin: ", currentAdmin);
+  // console.log("current user : ", currentUser);
+  // console.log("current admin: ", currentAdmin);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
