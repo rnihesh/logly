@@ -120,6 +120,10 @@
   }
 }
 
+.site-title{
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: none;
+}
 
 
 .user-info:hover {
