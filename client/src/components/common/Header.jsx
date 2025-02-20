@@ -23,7 +23,7 @@ function Header() {
     <div className="header-container mb-3">
       <nav className="navbar d-flex justify-content-between align-items-center p-2 shadow">
         <div className="logo-container d-flex justify-content-center align-items-center">
-          <Link to={"https://logly.vercel.app" + "/"}>
+          <Link to="/" >
             <img src={TypeWrite} alt="logo" className="logo" />
           </Link>
         </div>
