@@ -111,6 +111,9 @@ function Home() {
   }, [isLoaded]);
 
   useEffect(() => {
+    const currentPath = window.location.pathname;
+  
+    if (currentPath !== "/") return; // 🔥 Prevents overriding homepage redirect
     if (currentUser?.role === "user" && error.length === 0) {
       navigate(`user-profile/${currentUser.email}`);
     }
