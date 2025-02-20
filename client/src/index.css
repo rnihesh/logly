@@ -41,7 +41,7 @@
     z-index: 1000;
 }
 
-@media (max-width: 177px) {
+@media (max-width: 380px) {
   .navbar {
     flex-direction: column;
     align-items: center;
@@ -403,6 +403,9 @@
     .role-btn img {
       width: 80px;
     }
+    .user-section{
+      max-width: 85%;
+    }
   }
   
   @media (max-width: 576px) {
@@ -413,6 +416,9 @@
     .role-btn {
       font-size: 1.1rem;
       width: 100%;
+    }
+    .user-section{
+      max-width: 90%;
     }
   }
   

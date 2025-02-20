@@ -17,6 +17,7 @@ function Articles() {
   } = useForm();
   const [selection, setSelection] = useState("");
   const selectedCategory = watch("category");
+  const [loading, setLoading] = useState(true);
 
   //get all articles
   async function getArticles() {
@@ -45,9 +46,13 @@ function Articles() {
     getArticles();
   }, []);
   // console.log(articles);
+  useEffect(() => {
+    if (articles.length > 0) {
+      setLoading(false);
+    }
+  }, [articles]);
 
   return (
-
     <div className="container mt-4">
       {error && <p className="text-center text-danger display-6">{error}</p>}
       <form className="mb-4">
@@ -62,45 +67,55 @@ function Articles() {
         </select>
       </form>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {articles
-          .filter(
-            (articleObj) =>
-              selectedCategory === "All" ||
-              articleObj.category === selectedCategory
-          )
-          .map((articleObj) => (
-            <div className="col" key={articleObj.articleId}>
-              <div className="card h-100 shadow-sm">
-                <div className="card-body">
-                  <div className="d-flex justify-content-start mb-4 align-items-center card-det">
-                    <img
-                      src={articleObj.authorData.profileImageUrl}
-                      alt="Profile"
-                      width="40"
-                      className="rounded-circle me-2"
-                    />
-                    <small className="text-secondary">
-                      {articleObj.authorData.nameOfAuthor}
+        {loading ? (
+          <div className="w-100 text-center">
+            <div className="spinner-grow text-secondary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          articles
+            .filter(
+              (articleObj) =>
+                selectedCategory === "All" ||
+                articleObj.category === selectedCategory
+            )
+            .map((articleObj) => (
+              <div className="col" key={articleObj.articleId}>
+                <div className="card h-100 shadow-sm">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-start mb-4 align-items-center card-det">
+                      <img
+                        src={articleObj.authorData.profileImageUrl}
+                        alt="Profile"
+                        width="40"
+                        className="rounded-circle me-2"
+                      />
+                      <small className="text-secondary">
+                        {articleObj.authorData.nameOfAuthor}
+                      </small>
+                    </div>
+
+                    <h5 className="card-title mt-2">{articleObj.title}</h5>
+                    <p className="card-text text-muted">
+                      {articleObj.content.substring(0, 80)}...
+                    </p>
+                    <button
+                      className=" btn-prima"
+                      onClick={() => goToArticleById(articleObj)}
+                    >
+                      Read more...
+                    </button>
+                  </div>
+                  <div className="card-footer text-muted text-start border-0">
+                    <small>
+                      Last updated on {articleObj.dateOfModification}
                     </small>
                   </div>
-
-                  <h5 className="card-title mt-2">{articleObj.title}</h5>
-                  <p className="card-text text-muted">
-                    {articleObj.content.substring(0, 80)}...
-                  </p>
-                  <button
-                    className=" btn-prima"
-                    onClick={() => goToArticleById(articleObj)}
-                  >
-                    Read more...
-                  </button>
-                </div>
-                <div className="card-footer text-muted text-start border-0">
-                  <small>Last updated on {articleObj.dateOfModification}</small>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+        )}
       </div>
     </div>
   );
