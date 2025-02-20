@@ -8,6 +8,7 @@ const adminApp = require("./APIs/adminApi");
 
 const cors = require('cors')
 app.use(cors())
+app.set("trust proxy", true);
 
 
 

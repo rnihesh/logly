@@ -7,7 +7,15 @@ const Article = require("../models/articleModel.js");
 const { requireAuth, clerkMiddleware } = require("@clerk/express");
 require("dotenv").config();
 
-authorApp.use(clerkMiddleware())
+authorApp.use(clerkMiddleware());
+authorApp.use((req, res, next) => {
+  console.log("Clerk Middleware Triggered:", req.auth);
+  next();
+});
+authorApp.get("/debug-clerk", (req, res) => {
+  console.log("Headers:", req.headers);
+  res.send(req.headers);
+});
 
 //create new author
 authorApp.post("/author", expressAsyncHandler(createUserOrAuthor));
@@ -79,7 +87,9 @@ authorApp.put(
       }
     );
     //send res
-    res.status(200).send({ message: "article deleted or restored", payload: dbRes });
+    res
+      .status(200)
+      .send({ message: "article deleted or restored", payload: dbRes });
   })
 );
 
