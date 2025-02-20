@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import { userAuthorContextObj } from "../../contexts/UserAuthorContext.jsx";
 import TypeWrite from "../../assets/typewriter.png";
-
+import { getBaseUrl } from "../../utils/config.js";
 function Header() {
   const { signOut } = useClerk();
   const { isSignedIn, user } = useUser();
@@ -23,7 +23,7 @@ function Header() {
     <div className="header-container mb-3">
       <nav className="navbar d-flex justify-content-between align-items-center p-2 shadow">
         <div className="logo-container d-flex justify-content-center align-items-center">
-          <Link to="/">
+          <Link to={"https://logly.vercel.app" + "/"}>
             <img src={TypeWrite} alt="logo" className="logo" />
           </Link>
         </div>
