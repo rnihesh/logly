@@ -7,7 +7,7 @@ const Article = require("../models/articleModel.js");
 const { requireAuth, clerkMiddleware } = require("@clerk/express");
 require("dotenv").config();
 
-// authorApp.use(clerkMiddleware())
+authorApp.use(clerkMiddleware())
 
 //create new author
 authorApp.post("/author", expressAsyncHandler(createUserOrAuthor));
