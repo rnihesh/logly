@@ -18,14 +18,21 @@ function Header() {
     setCurrentUser(null);
     navigate("/");
   }
+  const handleLogoClick = () => {
+    navigate("/");
+  };
 
   return (
     <div className="header-container mb-3">
       <nav className="navbar d-flex justify-content-between align-items-center p-2 shadow">
         <div className="logo-container d-flex justify-content-center align-items-center">
-          <Link to="">
-            <img src={TypeWrite} alt="logo" className="logo" href="#" />
-          </Link>
+          <img
+            src={TypeWrite}
+            alt="logo"
+            className="logo"
+            onClick={handleLogoClick}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <ul className="nav-links d-flex justify-content-around align-items-center m-1 list-unstyled">
           {!isSignedIn ? (
