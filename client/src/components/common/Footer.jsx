@@ -33,7 +33,7 @@ function Footer() {
           </p>
         </address> */}
 
-        <div className="social-icons">
+        <div className="social-icons flex-wrap">
           <a
             href="https://github.com/rnihesh"
             target="_blank"

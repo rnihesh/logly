@@ -12,7 +12,7 @@ import { getBaseUrl } from "../../utils/config.js";
 function ArticleByID() {
   const { state } = useLocation();
   const { currentUser } = useContext(userAuthorContextObj);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [editArticleStatus, setEditArticleStatus] = useState(false);
   const navigate = useNavigate();
   const { getToken } = useAuth();
@@ -79,6 +79,7 @@ function ArticleByID() {
     if (res.data.message === "comment added") {
       setCommentStatus(res.data.message);
     }
+    reset();
   }
   useEffect(() => {}, [state.comments]);
 

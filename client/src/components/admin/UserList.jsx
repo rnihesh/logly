@@ -80,8 +80,8 @@ function UserList() {
                     alt="Profile"
                     className="admin-user-img"
                   />
-                  <p className="admin-user-name">{user.firstName}</p>
-                  <p className="admin-user-role">{user.role}</p>
+                  <p className="admin-user-name tlef">{user.firstName}</p>
+                  <p className="admin-user-role tlef">{user.role}</p>
                   <p className="admin-user-status text-danger fw-bold">Inactive</p>
                   <button
                     className="admin-btn admin-btn-enable"
