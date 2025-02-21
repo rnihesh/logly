@@ -879,6 +879,9 @@ label {
 .contact-info p{
   margin-bottom: -1px;
 }
+.contact-info a{
+  color: #667085;
+}
 .footer-bottom {
   margin-top: 20px;
   text-align: center;

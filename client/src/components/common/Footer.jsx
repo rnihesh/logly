@@ -15,8 +15,12 @@ function Footer() {
         </div>
 
         <address className="contact-info">
-          <p>Email: niheshr03@gmail.com</p>
-          <p>Phone: (123) 456-7890</p>
+          <p>
+            Email: <a href="mailto:niheshr03@gmail.com">niheshr03@gmail.com</a>
+          </p>
+          <p>
+            Phone: <a href="tel:+918328094810">+91 8328094810</a>
+          </p>
         </address>
 
         <div className="footer-bottom">
