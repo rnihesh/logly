@@ -12,7 +12,7 @@ function Signin() {
             headerTitle: "text-[#667085] font-bold",
           },
         }}
-        redirectUrl="/"
+        fallbackRedirectUrl="/"
         signUpUrl="/signup"
       />
     </div>

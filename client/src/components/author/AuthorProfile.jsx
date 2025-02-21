@@ -6,7 +6,7 @@ function AuthorProfile() {
   const { currentUser } = useContext(userAuthorContextObj);
   return (
     <div className="author-profile">
-      <ul className="d-flex justify-content-around list-unstyled">
+      <ul className="d-flex justify-content-around list-unstyled flex-wrap">
         <li className="nav-item">
           <NavLink
             to="articles"

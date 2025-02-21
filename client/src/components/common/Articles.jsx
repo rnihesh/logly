@@ -54,7 +54,7 @@ function Articles() {
 
   return (
     <div className="container mt-4">
-      {error && <p className="text-center text-danger display-6">{error}</p>}
+      {error && <p className="text-center text-danger  text-wrap">{error}</p>}
       <form className="mb-4">
         <label htmlFor="category" className="form-label fw-bold">
           Select a category
@@ -68,11 +68,30 @@ function Articles() {
       </form>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {loading ? (
-          <div className="w-100 text-center">
-            <div className="spinner-grow text-secondary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
+          <>
+            {[...Array(3)].map((_, index) => (
+              <div className="col" key={index}>
+                <div className="card h-100 shadow-sm">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-start mb-4 align-items-center card-det">
+                      <div
+                        className="placeholder rounded-circle bg-secondary"
+                        style={{ width: "40px", height: "40px" }}
+                      ></div>
+                      <small className="text-secondary placeholder col-4 bg-secondary ms-2"></small>
+                    </div>
+
+                    <h5 className="card-title mt-2 placeholder col-6 bg-secondary"></h5>
+                    <p className="card-text text-muted placeholder col-10 bg-secondary"></p>
+                    <button className="btn-prima placeholder col-4 bg-secondary"></button>
+                  </div>
+                  <div className="card-footer text-muted text-start border-0">
+                    <small className="placeholder col-6 bg-secondary"></small>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
         ) : (
           articles
             .filter(

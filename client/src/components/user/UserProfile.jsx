@@ -4,7 +4,7 @@ import { userAuthorContextObj } from "../../contexts/UserAuthorContext";
 
 function UserProfile() {
   const { currentUser } = useContext(userAuthorContextObj);
-  
+
   return (
     <div>
       <ul className="d-flex justify-content-around list-unstyled fs-1">

@@ -129,7 +129,7 @@ function Home() {
     <div className="container">
       {loading ? (
         <div className="d-flex justify-content-center">
-          <div className="spinner-grow" role="status">
+          <div className="spinner-grow spinner-grow-sm" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
@@ -138,7 +138,7 @@ function Home() {
           {isSignedIn === false && (
             <div className="home-item p-5 rounded-5">
               <div className="welcome-section text-center mb-4">
-                <h3>Welcome to Logly</h3>
+                <h3 className="fs-1">Welcome to Logly</h3>
                 <p>Join the community to share your thoughts and ideas.</p>
               </div>
               <div className="row g-3 justify-content-center info-section">

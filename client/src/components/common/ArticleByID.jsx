@@ -39,7 +39,9 @@ function ArticleByID() {
       "-" +
       currentDate.getMonth() +
       "-" +
-      currentDate.getFullYear();
+      currentDate.getFullYear() +
+      " " +
+      currentDate.toLocaleTimeString("en-US", { hour12: true });
     // console.log(articleAfterChanges);
 
     //make http post request
@@ -108,104 +110,14 @@ function ArticleByID() {
   return (
     <div className="container">
       {editArticleStatus === false ? (
-        // <>
-        //   {/* print full article */}
-        //   <div className="d-flex justify-content-between">
-        //     <div className="mb-5 author-block w-100 px-4 py-2 rounded-2 d-flex justify-content-between align-items-center">
-        //       <div>
-        //         <p className="display-3 me-4">{state.title}</p>
-        //         {/* doc & dom */}
-        //         <span className="py-3">
-        //           <small className="text-secondary me-4">
-        //             Created on : {state.dateOfCreation}
-        //           </small>
-        //           <small className="text-secondary me-4">
-        //             Modified on : {state.dateOfModification}
-        //           </small>
-        //         </span>
-        //       </div>
-        //       {/* author details */}
-        //       <div className="author-details text-center">
-        //         <img
-        //           src={state.authorData.profileImageUrl}
-        //           width="50px"
-        //           className="rounded-circle"
-        //           alt="ProfileImage"
-        //         />
-        //         <p>{state.authorData.nameOfAuthor}</p>
-        //       </div>
-        //     </div>
-        //     {/* edit and delete buttons */}
-        //     {currentUser.role === "author" && (
-        //       <div className="d-flex me-3 ms-2 " style={{ height: "100%" }}>
-        //         <button className="me-2 btn btn-light" onClick={enableEdit}>
-        //           <FaEdit className="text-warning" />
-        //         </button>
-        //         {/* if article is active display delete icon, otherwise display restore icon */}
-        //         {state.isArticleActive === true ? (
-        //           <button
-        //             className="me-2 btn btn-light"
-        //             onClick={deleteArticle}
-        //           >
-        //             <MdDelete className="text-danger" />
-        //           </button>
-        //         ) : (
-        //           <button
-        //             className="me-2 btn btn-light"
-        //             onClick={restoreArticle}
-        //           >
-        //             <MdRestore className="text-info" />
-        //           </button>
-        //         )}
-        //       </div>
-        //     )}
-        //   </div>
-        //   {/* content */}
-        //   <p
-        //     className="lead me-3 article-content"
-        //     style={{ whiteSpace: "pre-line" }}
-        //   >
-        //     {" "}
-        //     {state.content}
-        //   </p>
-        //   {/*  user comments */}
-        //   <div>
-        //     <div className="comments my-4">
-        //       {state.comments.length === 0 ? (
-        //         <p className="display-3"> No comments yet ....</p>
-        //       ) : (
-        //         state.comments.map((commentObj) => {
-        //           return (
-        //             <div key={commentObj._id}>
-        //               <p className="user-name">{commentObj?.nameOfUser}</p>
-        //               <p className="comment">{commentObj?.comment}</p>
-        //             </div>
-        //           );
-        //         })
-        //       )}
-        //     </div>
-        //   </div>
-        //   {/* comment form */}
-        //   <h1>{commentStatus}</h1>
-        //   {currentUser.role === "user" && (
-        //     <form onSubmit={handleSubmit(addComment)}>
-        //       <input
-        //         type="text"
-        //         {...register("comment")}
-        //         className="form-control mb-4"
-        //       />
-        //       <button className="btn btn-success mb-4">Add a comment</button>
-        //     </form>
-        //   )}
-        // </>
         <>
           <div className="articleID-container p-6 bg-white shadow-lg rounded-2xl">
-            <div className="articleID-header flex justify-between items-center mb-6 border-b pb-4">
+            <div className="articleID-header flex justify-between items-center mb-6 border-b pb-4 flex-wrap">
               <div>
                 <h1 className="articleID-title text-3xl font-bold text-gray-800 mb-2">
                   {state.title}
                 </h1>
-                <div className="articleID-meta text-sm ">
+                <div className="articleID-meta text-sm text-wrap">
                   <span className="mr-4">
                     Created on: {state.dateOfCreation}
                   </span>{" "}
@@ -339,7 +251,7 @@ function ArticleByID() {
             </div>
 
             <div className="text-end">
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn btn-light articleID-submit">
                 Save
               </button>
             </div>
