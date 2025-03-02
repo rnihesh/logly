@@ -477,8 +477,16 @@ label {
   text-align: center;
   border-radius: 20px;
   font-weight: bold;
-  /* border-bottom: 2px solid #E85F5C; */
 }
+.inactive-link {
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 20px;
+  font-weight: bold;
+  border: 1px solid #667085;
+}
+
 
 /* Default link styling */
 .nav-link {

@@ -11,7 +11,7 @@ function AuthorProfile() {
           <NavLink
             to="articles"
             className={({ isActive }) =>
-              isActive ? "nav-link active-link" : "nav-link"
+              isActive ? "nav-link active-link" : "nav-link inactive-link"
             }
           >
             Articles
@@ -21,7 +21,7 @@ function AuthorProfile() {
           <NavLink
             to="article"
             className={({ isActive }) =>
-              isActive ? "nav-link active-link" : "nav-link"
+              isActive ? "nav-link active-link" : "nav-link inactive-link"
             }
           >
             Add new article
