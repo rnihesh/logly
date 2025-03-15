@@ -11,7 +11,6 @@ app.use(cors())
 app.set("trust proxy", true);
 
 
-
 const port = process.env.PORT || 4000;
 
 // Basic route to test if server is running
