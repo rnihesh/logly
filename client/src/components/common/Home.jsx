@@ -42,7 +42,7 @@ function Home() {
         let { message, payload } = res.data;
         if (message === "author") {
           setCurrentUser({
-            ...currentUser,
+            ...currentUser, 
             ...payload,
           });
           //save user to localstorage
